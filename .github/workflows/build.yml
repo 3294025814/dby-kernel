@@ -39,10 +39,15 @@ jobs:
       working-directory: Code_Opensource/kernel
       shell: bash
       run: |
+        # Create missing prebuilts ccache directory and symlink system ccache
+        mkdir -p ../../../prebuilts/misc/linux-x86/ccache
+        ln -sf /usr/bin/ccache ../../../prebuilts/misc/linux-x86/ccache/ccache
         export CROSS_COMPILE=aarch64-linux-gnu-
         export ARCH=arm64
         export CC=aarch64-linux-gnu-gcc
+        export HOSTCC=gcc
         export CXX=aarch64-linux-gnu-g++
+        export HOSTCXX=g++
         export CCACHE_DISABLE=1
         make merge_kona_defconfig
         make -j$(nproc) Image.gz-dtb
