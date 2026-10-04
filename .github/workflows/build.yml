@@ -36,12 +36,12 @@ jobs:
         chmod +x scripts/gcc-version.sh
 
     - name: Build kernel
-      working-directory: Code_Opensource/kernel
       shell: bash
       run: |
-        # Create missing prebuilts ccache directory and symlink system ccache
-        mkdir -p ../../../prebuilts/misc/linux-x86/ccache
-        ln -sf /usr/bin/ccache ../../../prebuilts/misc/linux-x86/ccache/ccache
+        # Create missing prebuilts ccache directory in repo root and symlink system ccache
+        mkdir -p prebuilts/misc/linux-x86/ccache
+        ln -sf /usr/bin/ccache prebuilts/misc/linux-x86/ccache/ccache
+        cd Code_Opensource/kernel
         export CROSS_COMPILE=aarch64-linux-gnu-
         export ARCH=arm64
         export CC=aarch64-linux-gnu-gcc
