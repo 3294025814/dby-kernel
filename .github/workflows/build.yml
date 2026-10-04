@@ -41,6 +41,9 @@ jobs:
       run: |
         export CROSS_COMPILE=aarch64-linux-gnu-
         export ARCH=arm64
+        export CC=aarch64-linux-gnu-gcc
+        export CXX=aarch64-linux-gnu-g++
+        export CCACHE_DISABLE=1
         make merge_kona_defconfig
         make -j$(nproc) Image.gz-dtb
 
