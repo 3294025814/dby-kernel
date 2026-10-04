@@ -18,6 +18,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libncurses-dev bison flex libssl-dev bc git python3 zip unzip wget gcc-aarch64-linux-gnu
 
+    - name: Fix script permissions
+      working-directory: Code_Opensource/kernel
+      run: |
+        chmod +x scripts/*
+        chmod +x arch/arm64/tools/*
+
     - name: Build kernel
       working-directory: Code_Opensource/kernel
       run: |
