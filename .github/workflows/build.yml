@@ -21,14 +21,13 @@ jobs:
     - name: Fix script permissions and syntax
       working-directory: Code_Opensource/kernel
       run: |
-        # Use bash instead of dash for better compatibility
-        sudo ln -sf /bin/bash /bin/sh
         chmod +x scripts/*
         # Convert Python 2 print statements to Python 3
         find scripts -name "*.py" -exec sed -i 's/print \(.*\)/print(\1)/g' {} \;
 
     - name: Build kernel
       working-directory: Code_Opensource/kernel
+      shell: bash
       run: |
         export CROSS_COMPILE=aarch64-linux-gnu-
         export ARCH=arm64
