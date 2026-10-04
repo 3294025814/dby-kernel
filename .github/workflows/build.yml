@@ -21,6 +21,8 @@ jobs:
     - name: Fix script permissions and syntax
       working-directory: Code_Opensource/kernel
       run: |
+        # Fix Windows CRLF line endings to Linux LF
+        find scripts -name "*.sh" -exec sed -i 's/\r$//' {} \;
         chmod +x scripts/*
         # Convert Python 2 print statements to Python 3
         find scripts -name "*.py" -exec sed -i 's/print \(.*\)/print(\1)/g' {} \;
