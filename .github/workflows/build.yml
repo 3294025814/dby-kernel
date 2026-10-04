@@ -22,7 +22,6 @@ jobs:
       working-directory: Code_Opensource/kernel
       run: |
         chmod +x scripts/*
-        chmod +x arch/arm64/tools/*
 
     - name: Build kernel
       working-directory: Code_Opensource/kernel
