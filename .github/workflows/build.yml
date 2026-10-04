@@ -16,12 +16,14 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libncurses-dev bison flex libssl-dev bc git python3 zip unzip wget gcc-aarch64-linux-gnu
+        sudo apt-get install -y build-essential libncurses-dev bison flex libssl-dev bc git python3 zip unzip wget gcc-aarch64-linux-gnu python2
 
-    - name: Fix script permissions
+    - name: Fix script permissions and Python syntax
       working-directory: Code_Opensource/kernel
       run: |
         chmod +x scripts/*
+        # Convert Python 2 print statements to Python 3
+        find scripts -name "*.py" -exec sed -i 's/print \(.*\)/print(\1)/g' {} \;
 
     - name: Build kernel
       working-directory: Code_Opensource/kernel
