@@ -18,9 +18,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libncurses-dev bison flex libssl-dev bc git python3 zip unzip wget gcc-aarch64-linux-gnu python2
 
-    - name: Fix script permissions and Python syntax
+    - name: Fix script permissions and syntax
       working-directory: Code_Opensource/kernel
       run: |
+        # Use bash instead of dash for better compatibility
+        sudo ln -sf /bin/bash /bin/sh
         chmod +x scripts/*
         # Convert Python 2 print statements to Python 3
         find scripts -name "*.py" -exec sed -i 's/print \(.*\)/print(\1)/g' {} \;
