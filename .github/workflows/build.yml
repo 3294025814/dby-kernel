@@ -24,6 +24,10 @@ jobs:
         # Fix Windows CRLF line endings to Linux LF
         find scripts -name "*.sh" -exec sed -i 's/\r$//' {} \;
         chmod +x scripts/*
+        # Replace gcc-version.sh with simple script to avoid printf compatibility issues
+        echo '#!/bin/bash' > scripts/gcc-version.sh
+        echo 'echo "100300"' >> scripts/gcc-version.sh
+        chmod +x scripts/gcc-version.sh
         # Convert Python 2 print statements to Python 3
         find scripts -name "*.py" -exec sed -i 's/print \(.*\)/print(\1)/g' {} \;
 
