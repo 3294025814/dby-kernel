@@ -35,14 +35,6 @@ jobs:
         echo 'echo "10.0.7"' >> scripts/gcc-version.sh
         chmod +x scripts/gcc-version.sh
 
-    - name: Disable module signature and version check
-          working-directory: Code_Opensource/kernel
-                run: |
-                        # Disable module signature verification and version check
-                                echo '# CONFIG_MODVERSIONS is not set' >> arch/arm64/configs/merge_kona_defconfig
-                                        echo '# CONFIG_MODULE_SIG is not set' >> arch/arm64/configs/merge_kona_defconfig
-                                                echo '# CONFIG_MODULE_SIG_FORCE is not set' >> arch/arm64/configs/merge_kona_defconfig
-                                                        echo '# CONFIG_MODULE_SIG_ALL is not set' >> arch/arm64/configs/merge_kona_defconfig
                                                         
     - name: Build kernel
       shell: bash
@@ -55,6 +47,12 @@ jobs:
         export ARCH=arm64
         export CC=aarch64-linux-gnu-gcc
         export HOSTCC=gcc
+             # Disable module signature verification and version check
+                     echo '# CONFIG_MODVERSIONS is not set' >> arch/arm64/configs/merge_kona_defconfig
+                             echo '# CONFIG_MODULE_SIG is not set' >> arch/arm64/configs/merge_kona_defconfig
+                                     echo '# CONFIG_MODULE_SIG_FORCE is not set' >> arch/arm64/configs/merge_kona_defconfig
+                                             echo '# CONFIG_MODULE_SIG_ALL is not set' >> arch/arm64/configs/merge_kona_defconfig
+                                             
         export CXX=aarch64-linux-gnu-g++
         export HOSTCXX=g++
         export CCACHE_DISABLE=1
